@@ -18,7 +18,7 @@ do
     mkdir -p "$OutputDirectory"/spectrals/
     OutputFile=${OutputFile%.flac}.flac
     OutputBasename=$(basename "$OutputFile")
-    sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 16 "$OutputFile" rate 44100 dither -S
+    sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 16 "$OutputFile" rate 44100 dither -s
     sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.flac}.jpg"
   else
     mkdir -p "$OutputDirectory"
