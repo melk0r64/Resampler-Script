@@ -21,6 +21,7 @@ do
     OutputFile=${OutputFile%.flac}.dsf
     OutputBasename=$(basename "$OutputFile")
     sox "$FoundFile" -V3 -b 1 "$OutputFile" $DSD64 sdm -f sdm-8
+    sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.dsf}.jpg"
   else
     mkdir -p "$OutputDirectory"
     cp "$FoundFile" "$OutputFile"
