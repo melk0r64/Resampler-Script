@@ -27,7 +27,8 @@ do
 
   echo "Saved as" $OutputFile
 done
-### dithering:
+
+
 #Effect usage:
 
 #dither [-S|-s|-f filter] [-a] [-p precision]
