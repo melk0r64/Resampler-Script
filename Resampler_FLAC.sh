@@ -28,3 +28,7 @@ do
 
   echo "Saved as" $OutputFile
 done
+
+#Effect usage:
+
+#lowpass [-1|-2] frequency [width[q|o|h|k]](0.707q)
