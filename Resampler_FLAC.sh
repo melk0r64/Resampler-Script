@@ -19,7 +19,7 @@ do
     mkdir -p "$OutputDirectory"/spectrals/
     OutputFile=${OutputFile%.flac}.flac
     OutputBasename=$(basename "$OutputFile")
-    sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 24 "$OutputFile" lowpass -2 21000 > lowpass.plt rate -v -s -b 90 $BitRate
+    sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 24 "$OutputFile" lowpass -2 21000 rate -v -s -b 90 $BitRate
     sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.flac}.jpg"
   else
     mkdir -p "$OutputDirectory"
