@@ -27,3 +27,15 @@ do
 
   echo "Saved as" $OutputFile
 done
+### dithering:
+#Effect usage:
+
+#dither [-S|-s|-f filter] [-a] [-p precision]
+#  (none)   Use TPDF
+#  -S       Use sloped TPDF (without noise shaping)
+#  -s       Shape noise (with shibata filter)
+#  -f name  Set shaping filter to one of: lipshitz, f-weighted,
+#           modified-e-weighted, improved-e-weighted, gesemann,
+#           shibata, low-shibata, high-shibata.
+#  -a       Automatically turn on & off dithering as needed (use with caution!)
+#  -p bits  Override the target sample precision
