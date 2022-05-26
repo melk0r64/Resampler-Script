@@ -20,4 +20,4 @@ https://www.diyaudio.com/community/threads/beginners-filter-brewing-thread-for-t
 
 SoX's documentation lags far behind current development. I haven't been able to find the latest syntax for the "rate" (resample) effect anywhere else on the web, so here it is, as I understand it from examining the code:
 
-rate [<quality-level>] [<override-options>] <rate>
+rate "[<quality-level>] [<override-options>] <rate>"
