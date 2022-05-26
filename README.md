@@ -46,15 +46,9 @@ anti-aliasing bandwidth percentage = 100 (no aliasing above the audio passband)
 
 bandwidth, noise rejection, bit depth, and allowed passband rolloff are set according to this table:
 
-**quality level**  **0 dB**  **-3 dB** 
-      -q 	            n/a 	n/a 	~30 dB 	16 	0.35 dB
-      -l 	            68% 	80% 	96 dB 	16 	0.35 dB
-      -m 	            91% 	95% 	96 dB 	16 	0.35 dB
-      -g 	91% 	95% 	96 dB 	16 	0.01 dB
-      -h 	91% 	95% 	120 dB 	20 	0.01 dB
-      -e 	91% 	95% 	144 dB 	24 	0.01 dB
-      -v 	91% 	95% 	168 dB 	28 	0.01 dB
-      -u 	91% 	95% 	192 dB 	32 	0.01 dB
+![immagine](https://user-images.githubusercontent.com/106148952/170472776-1b572a6d-880e-4708-8a2f-dac897762eab.png)
+
+
   
 The override-options parameters, if provided, will override the values in the above table. In the following list of override options, the options in each group are mutually exclusive. For example, you can use -s, or -b <n>, or -B <n>, or none of those three, but you cannot use any combination of -s, -b, and -B.
 
