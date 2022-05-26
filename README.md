@@ -24,7 +24,7 @@ https://forums.slimdevices.com/showthread.php?105309-C-3PO-plugin-a-trnscoding-h
 
 SoX's documentation lags far behind current development. I haven't been able to find the latest syntax for the "rate" (resample) effect anywhere else on the web, so here it is, as I understand it from examining the code:
 
-rate "<quality-level> <override-options> <rate>"
+rate <quality-level> <override-options> <rate>
   
 The higher the quality level, the more compute power is required.
 
@@ -99,4 +99,16 @@ Noise Rejection / Bit Depth:
 Passband Rolloff:
 
     -f = 0 dB (no passband rolloff allowed)  
+  
+  
+  
+The following override-options parameters are also supported, but they merely change the internal implementation of certain aspects of the resampler. They are for software testing and development, and are not intended to have any effect on the sound:
+
+-t = use high-precision clock (i.e., use a double-precision floating-point number, rather than a fixed-point Q32.32 number, to express the ratio between output and input sample rates). Apparently intended for testing weird resampler use-cases like continuously variable sampling rates. Has no effect on C-3PO's sampling-rate conversions.
+
+-i <-1 .. 2> = force a particular coefficient interpolator
+
+-c <100 .. INT_MAX> = for certain values of the -i parameter, set maximum amount (in approximately kilobytes) of memory used for coefficients
+
+-n: no small integer optimization  
   
