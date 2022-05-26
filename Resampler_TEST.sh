@@ -28,7 +28,6 @@ do
 #    sox -S -V6 "$FoundFile" -b 24 -r $BitRate "$OutputFile" upsample 2 sinc -a80 -L -21k -n $TAPS
 #    sox -S -V6 "$FoundFile" -b 24 -r $BitRate "$OutputFile" upsample 4 sinc -a80 -L -21k -n $TAPS
 #    sox -S -V6 "$FoundFile" -b 24 -r $BitRate "$OutputFile" sinc -a80 -I -21.5k -t8000
-#    sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.flac}.jpg"
     sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.flac}.jpg"
   else
     mkdir -p "$OutputDirectory"
