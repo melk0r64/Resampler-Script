@@ -1,3 +1,4 @@
+#Batch modified from https://gist.github.com/jorgehatccrma/24786ee7fc8158e7bd1b010d7cf34bbe
 #!/bin/bash
 
 SourceDirectory=$1
