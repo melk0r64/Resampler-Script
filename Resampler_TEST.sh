@@ -1,4 +1,5 @@
 #!/bin/bash
+#experimental filter
 
 SourceDirectory=$1
 DestinedDirectory=$2
