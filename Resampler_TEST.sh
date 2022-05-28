@@ -3,7 +3,7 @@
 SourceDirectory=$1
 DestinedDirectory=$2
 TargetCompression=5
-BitRate=192000
+BitRate=176400
 TAPS=64000000
 
 mkdir -p "$DestinedDirectory"
