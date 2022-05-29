@@ -21,6 +21,11 @@ do
     mkdir -p "$OutputDirectory"/spectrals/
     OutputFile=${OutputFile%.flac}.flac
     OutputBasename=$(basename "$OutputFile")
+    
+#    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.99996 -d 32 -c 2147483647 -L -u $BitRate
+#    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.9999 -d 32 -c 2147483647 -L -u $BitRate sinc -22050
+#    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.9999 -d 32 -c 2147483647 -L -u $BitRate
+########################################################################################################################    
 #    sox "$FoundFile" -C $TargetCompression -S -G -V6 -b 24 "$OutputFile" rate -u -b 99.9 -I $BitRate
 #    sox "$FoundFile" -C $TargetCompression -S -G -V6 -b 24 "$OutputFile" rate -u -s -b 99.9 -L $BitRate
 #    sox "$FoundFile" -C $TargetCompression -S -G -V6 -b 24 "$OutputFile" rate -v -s -b 90 $BitRate
