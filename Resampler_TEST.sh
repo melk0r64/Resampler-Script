@@ -22,6 +22,7 @@ do
     OutputFile=${OutputFile%.flac}.flac
     OutputBasename=$(basename "$OutputFile")
     
+     sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.9999 -d 32 -R 160 $BitRate
 #    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.99996 -d 32 -c 2147483647 -L -u $BitRate
 #    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.9999 -d 32 -c 2147483647 -L -u $BitRate sinc -22050
 #    sox --no-clobber "$FoundFile" -C $TargetCompression -S -V6 -b 24 "$OutputFile" vol -2dB rate -b 99.9999 -d 32 -c 2147483647 -L -u $BitRate
