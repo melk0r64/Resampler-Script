@@ -1,5 +1,5 @@
-# Sox Resampler Script
-Batch script for massive resampler with Sox
+# Resampler Script
+Batch script for massive resampler with Sox and other Resampler
 
 ex. /ResamplerDSD.sh /mnt/c/Resampler /mnt/c/Resampler/Resampled
 
