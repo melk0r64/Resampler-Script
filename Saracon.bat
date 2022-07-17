@@ -34,7 +34,7 @@ for /R "%SourcePath%" %%I in (*.flac) do (
     set "RelativePath=%%~dpI"
     set "RelativePath=!RelativePath:~%PathLength%,-1!"
     md "%TargetPath%!RelativePath!" 2>nul
-rem Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 48000 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
+Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 48000 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
 rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 88200 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
 rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 96000 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
 rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 176400 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
