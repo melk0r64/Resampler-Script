@@ -1,3 +1,5 @@
+rem https://github.com/jniemann66/ReSampler
+
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 set "SourcePath=F:\FLAC_ALBUM\"
