@@ -26,7 +26,6 @@ if not "!SourcePath:~%PathLength%,1!" == "" (
 )
 
 rem Process each file not having hidden or system attribute set and
-rem decrypt it to the target path relative to source path. The relative
 rem path is determined by removing from full path of current file the
 rem first PathLength characters and the last character which is the
 rem directory separator (backslash).
