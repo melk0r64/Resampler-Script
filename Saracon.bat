@@ -43,8 +43,8 @@ Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 44100 -d tpdf -f fla
   rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 192000 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
   rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 352800 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
   rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 384000 -d off -f flac -n 24bit -b normal -g -1.0 "%%I"
-  rem   Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 44100 -d powr2 -f flac -n 16bit -b normal -g -1.0 "%%I"
   rem   Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 44100 -d powr1 -f flac -n 16bit -b normal -g -1.0 "%%I"
+  rem   Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 44100 -d powr2 -f flac -n 16bit -b normal -g -1.0 "%%I"
   rem   Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2p -r 44100 -d powr3 -f flac -n 16bit -b normal -g -1.0 "%%I"
   rem	Saracon.exe "%%I" -t "%TargetPath%!RelativePath!" -c p2d -r 2822400 -d off -f dff -b normal -g -1.0 "%%I"
     
