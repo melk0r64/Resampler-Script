@@ -39,7 +39,7 @@ for /R "%SourcePath%" %%I in (*.flac) do (
     set "RelativePath=!RelativePath:~%PathLength%,-1!"
     md "%TargetPath%!RelativePath!" 2>nul
 
-    set "COMMAND=C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" -r 88200 -b 24 --minphase --relaxedLPF --showStages --tempDir c:\Temp"
+    set "COMMAND=C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" -r 48000 -b 24 --minphase --relaxedLPF --showStages --tempDir c:\Temp"
 
     rem Launch the resampler tool in a separate process
     START /B CMD /C "%COMMAND%"
