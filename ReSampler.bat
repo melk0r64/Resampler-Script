@@ -1,5 +1,3 @@
-rem https://github.com/jniemann66/ReSampler
-
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 set "SourcePath=F:\FLAC_ALBUM\"
@@ -27,17 +25,24 @@ if not "!SourcePath:~%PathLength%,1!" == "" (
     goto GetPathLength
 )
 
-rem Process each file not having hidden or system attribute set and
-rem decrypt it to the target path relative to source path. The relative
-rem path is determined by removing from full path of current file the
-rem first PathLength characters and the last character which is the
-rem directory separator (backslash).
+rem Set up ReSampler parameters.
+set "ReSamplerParams=-r 44100 -b 16 --steepLPF --dither --showStages --tempDir F:\aui_cache"
+
+rem Process each supported file in the source path and
+rem resample it to the target path, preserving the directory
+rem structure of the source path in the target path.
 for /R "%SourcePath%" %%I in (*.flac) do (
     set "RelativePath=%%~dpI"
     set "RelativePath=!RelativePath:~%PathLength%,-1!"
     md "%TargetPath%!RelativePath!" 2>nul
 
-C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" -r 88200 -b 24 --minphase --relaxedLPF --showStages --tempDir F:\aui_cache 
-rem C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" -r 44100 -b 16 --steepLPF --dither --showStages --tempDir F:\aui_cache
+    rem Run ReSampler on the input file and write the output to the target path.
+    echo Resampling "%%~nxI"...
+    C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" %ReSamplerParams%
+    if %errorlevel% neq 0 (
+        echo ERROR: Failed to resample "%%~nxI".
+    )
 )
+
+echo Resampling complete.
 endlocal
