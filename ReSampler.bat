@@ -25,24 +25,40 @@ if not "!SourcePath:~%PathLength%,1!" == "" (
     goto GetPathLength
 )
 
-rem Set up ReSampler parameters.
-set "ReSamplerParams=-r 44100 -b 16 --steepLPF --dither --showStages --tempDir F:\aui_cache"
+rem Process each file not having hidden or system attribute set and
+rem decrypt it to the target path relative to source path. The relative
+rem path is determined by removing from full path of current file the
+rem first PathLength characters and the last character which is the
+rem directory separator (backslash).
 
-rem Process each supported file in the source path and
-rem resample it to the target path, preserving the directory
-rem structure of the source path in the target path.
+set "MAX_PROCESSES=4"
+set "PROCESS_COUNTER=0"
+
 for /R "%SourcePath%" %%I in (*.flac) do (
     set "RelativePath=%%~dpI"
     set "RelativePath=!RelativePath:~%PathLength%,-1!"
     md "%TargetPath%!RelativePath!" 2>nul
 
-    rem Run ReSampler on the input file and write the output to the target path.
-    echo Resampling "%%~nxI"...
-    C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" %ReSamplerParams%
-    if %errorlevel% neq 0 (
-        echo ERROR: Failed to resample "%%~nxI".
+    set "COMMAND=C:\ReSampler\ReSampler -i "%%I" -o "%TargetPath%!RelativePath!/%%~nxI" -r 88200 -b 24 --minphase --relaxedLPF --showStages --tempDir F:\aui_cache"
+
+    rem Launch the resampler tool in a separate process
+    START /B CMD /C "%COMMAND%"
+
+    set /A PROCESS_COUNTER+=1
+    if !PROCESS_COUNTER! geq !MAX_PROCESSES! (
+        rem Wait for any of the launched processes to finish before launching more
+        CALL :WAIT_FOR_PROCESS
     )
 )
 
-echo Resampling complete.
-endlocal
+:WAIT_FOR_PROCESS
+rem Wait for one process to finish
+PING -n 2 127.0.0.1 >NUL
+for /f "tokens=3" %%a in ('TASKLIST /FI "WINDOWTITLE eq C:\ReSampler\ReSampler.exe" /NH') do (
+    if "%%a" == "C:\ReSampler\ReSampler.exe" (
+        rem There is still at least one instance of the resampler tool running
+        goto :WAIT_FOR_PROCESS
+    )
+)
+set "PROCESS_COUNTER=0"
+exit /B
