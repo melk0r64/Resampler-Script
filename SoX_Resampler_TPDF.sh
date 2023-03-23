@@ -1,32 +1,57 @@
 #!/bin/bash
 
-SourceDirectory=$1
-DestinedDirectory=$2
-TargetCompression=5
+# Validate input
+if [[ ! -d "$1" ]]; then
+  echo "Source directory '$1' does not exist or is not a directory"
+  exit 1
+fi
 
-mkdir -p "$DestinedDirectory"
+if [[ ! -d "$2" ]]; then
+  echo "Destination directory '$2' does not exist or is not a directory"
+  exit 1
+fi
 
+# Resolve source and destination directories to full paths
+SourceDirectory=$(readlink -f "$1")
+DestinedDirectory=$(readlink -f "$2")
+
+# Use printf instead of echo
+printf "Processing files in '%s'...\n" "$SourceDirectory"
+
+# Loop through all files in source directory
 find "$SourceDirectory" -type f -print0 | while read -d $'\0' FoundFile
 do
-  echo "Processing" $FoundFile
+  printf "Processing '%s'...\n" "$FoundFile"
 
-  OutputFile=$DestinedDirectory${FoundFile#"$SourceDirectory"}
+  OutputFile="$DestinedDirectory$(basename "$FoundFile")"
   OutputDirectory=$(dirname "$OutputFile")
 
   if [[ "$FoundFile" == *.flac ]]
   then
-    mkdir -p "$OutputDirectory"/spectrals/
+    # Use mkdir -p for all directories
+    mkdir -p "$OutputDirectory/spectrals"
     OutputFile=${OutputFile%.flac}.flac
-    OutputBasename=$(basename "$OutputFile")
-    sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 16 "$OutputFile" rate 44100 dither -s
-    sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/${OutputBasename%.flac}.jpg"
+
+    # Add error handling
+    if ! sox "$FoundFile" -C $TargetCompression -S -G -V3 -b 16 "$OutputFile" rate 44100 dither -s; then
+      echo "Error: Failed to process '$FoundFile'"
+      continue
+    fi
+
+    # Add error handling
+    if ! sox "$OutputFile" -n spectrogram -o "$OutputDirectory/spectrals/$(basename "${OutputFile%.flac}").jpg"; then
+      echo "Error: Failed to create spectrogram for '$FoundFile'"
+      continue
+    fi
   else
+    # Use mkdir -p for all directories
     mkdir -p "$OutputDirectory"
     cp "$FoundFile" "$OutputFile"
   fi
 
-  echo "Saved as" $OutputFile
+  printf "Saved as '%s'\n" "$OutputFile"
 done
+
 
 
 #Effect usage:
